@@ -42,7 +42,12 @@ STATE_PATH = Path(__file__).resolve().parent.parent / "data" / "licitacoes_estad
 
 REQUEST_TIMEOUT = 30
 PAGE_SIZE = 50
-MAX_PAGES_POR_MODALIDADE = 20
+# A API do PNCP não tem busca por palavra-chave no servidor (só filtra por
+# data/modalidade/UF), então o filtro de conteúdo é sempre feito aqui depois
+# de baixar os resultados. SP é sempre varrido por completo (universo menor);
+# o restante do país tem um teto maior pra não deixar o job rodando por horas.
+MAX_PAGINAS_SP = 100
+MAX_PAGINAS_NACIONAL = 300
 LOOKAHEAD_DIAS_PROPOSTA = 120  # janela de busca de prazos de encerramento
 FOLLOWUP_ALERTA_DIAS = 7  # avisa no follow-up quando faltar <= N dias para o prazo
 
@@ -235,15 +240,23 @@ def parse_item(item: dict[str, Any]) -> Licitacao | None:
     )
 
 
-def buscar_modalidade(session: requests.Session, codigo_modalidade: int, data_final: str) -> Iterator[dict[str, Any]]:
+def buscar_modalidade(
+    session: requests.Session,
+    codigo_modalidade: int,
+    data_final: str,
+    uf: str | None,
+    max_paginas: int,
+) -> Iterator[dict[str, Any]]:
     pagina = 1
-    while pagina <= MAX_PAGES_POR_MODALIDADE:
-        params = {
+    while pagina <= max_paginas:
+        params: dict[str, Any] = {
             "codigoModalidadeContratacao": codigo_modalidade,
             "dataFinal": data_final,
             "pagina": pagina,
             "tamanhoPagina": PAGE_SIZE,
         }
+        if uf:
+            params["uf"] = uf
         resp = session.get(f"{PNCP_BASE_URL}/contratacoes/proposta", params=params, timeout=REQUEST_TIMEOUT)
         if resp.status_code == 204:
             return
@@ -258,7 +271,7 @@ def buscar_modalidade(session: requests.Session, codigo_modalidade: int, data_fi
         if pagina >= total_paginas:
             return
         pagina += 1
-        time.sleep(0.3)
+        time.sleep(0.2)
 
 
 def buscar_licitacoes_abertas() -> list[Licitacao]:
@@ -269,24 +282,34 @@ def buscar_licitacoes_abertas() -> list[Licitacao]:
     session.headers.update({"Accept": "application/json"})
 
     encontradas: dict[str, Licitacao] = {}
-    for codigo_modalidade in MODALIDADES:
-        try:
-            for item in buscar_modalidade(session, codigo_modalidade, data_final):
-                licitacao = parse_item(item)
-                if licitacao is None:
-                    continue
-                # confirma que a proposta ainda está aberta (defensivo: a
-                # semântica exata do filtro dataFinal da API pode variar).
-                if licitacao.encerramento_proposta:
-                    try:
-                        encerramento = datetime.fromisoformat(licitacao.encerramento_proposta).date()
-                        if encerramento < hoje:
-                            continue
-                    except ValueError:
-                        pass
-                encontradas[licitacao.numero_controle] = licitacao
-        except requests.RequestException as exc:
-            print(f"[aviso] falha ao consultar modalidade {codigo_modalidade}: {exc}", file=sys.stderr)
+    # SP é varrido por inteiro (universo menor, prioridade explícita do
+    # negócio); o restante do país usa um teto de páginas maior, já que o
+    # volume nacional de pregões eletrônicos abertos pode ser grande e a API
+    # não permite filtrar por palavra-chave no servidor.
+    for uf, max_paginas, escopo in (("SP", MAX_PAGINAS_SP, "SP"), (None, MAX_PAGINAS_NACIONAL, "nacional")):
+        for codigo_modalidade in MODALIDADES:
+            escaneados = 0
+            achados = 0
+            try:
+                for item in buscar_modalidade(session, codigo_modalidade, data_final, uf, max_paginas):
+                    escaneados += 1
+                    licitacao = parse_item(item)
+                    if licitacao is None:
+                        continue
+                    # confirma que a proposta ainda está aberta (defensivo: a
+                    # semântica exata do filtro dataFinal da API pode variar).
+                    if licitacao.encerramento_proposta:
+                        try:
+                            encerramento = datetime.fromisoformat(licitacao.encerramento_proposta).date()
+                            if encerramento < hoje:
+                                continue
+                        except ValueError:
+                            pass
+                    encontradas[licitacao.numero_controle] = licitacao
+                    achados += 1
+            except requests.RequestException as exc:
+                print(f"[aviso] falha ao consultar modalidade {codigo_modalidade} ({escopo}): {exc}", file=sys.stderr)
+            print(f"[info] {escopo}/modalidade {codigo_modalidade}: {escaneados} escaneados, {achados} bateram no filtro")
 
     return list(encontradas.values())
 
