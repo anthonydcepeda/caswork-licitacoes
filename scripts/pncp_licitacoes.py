@@ -49,15 +49,25 @@ PAGE_SIZE = 50
 MAX_PAGINAS_SP = 100
 MAX_PAGINAS_NACIONAL = 150
 LOOKAHEAD_DIAS_PROPOSTA = 120  # janela de busca de prazos de encerramento
+PUBLICACAO_JANELA_DIAS = 14  # para modalidades diretas, "recente" substitui "prazo aberto"
 FOLLOWUP_ALERTA_DIAS = 7  # avisa no follow-up quando faltar <= N dias para o prazo
 
-# Modalidades relevantes para compra de equipamentos de médio/alto valor.
+# Modalidades competitivas (têm janela de proposta): compra de equipamentos
+# de médio/alto valor normalmente passa por aqui.
 MODALIDADES = {
     2: "Diálogo Competitivo",
     4: "Concorrência Eletrônica",
     5: "Concorrência Presencial",
     6: "Pregão Eletrônico",
     7: "Pregão Presencial",
+}
+
+# Modalidades diretas (sem fase de proposta competitiva) — contratação de
+# serviço especializado de menor valor, como despachante aduaneiro ou
+# consultoria em comércio exterior, costuma sair por aqui em vez de pregão.
+MODALIDADES_DIRETAS = {
+    8: "Dispensa de Licitação",
+    9: "Inexigibilidade",
 }
 
 SEGMENT_KEYWORDS: dict[str, list[str]] = {
@@ -232,7 +242,9 @@ def parse_item(item: dict[str, Any]) -> Licitacao | None:
         municipio=unidade.get("municipioNome") or "",
         objeto=objeto.strip(),
         valor_estimado=item.get("valorTotalEstimado"),
-        modalidade=item.get("modalidadeNome") or MODALIDADES.get(item.get("codigoModalidadeContratacao"), ""),
+        modalidade=item.get("modalidadeNome")
+        or MODALIDADES.get(item.get("codigoModalidadeContratacao"))
+        or MODALIDADES_DIRETAS.get(item.get("codigoModalidadeContratacao"), ""),
         abertura_proposta=item.get("dataAberturaProposta"),
         encerramento_proposta=item.get("dataEncerramentoProposta"),
         link=montar_link(item),
@@ -288,6 +300,45 @@ def buscar_modalidade(
         time.sleep(1.5)
 
 
+def buscar_modalidade_publicacao(
+    session: requests.Session,
+    codigo_modalidade: int,
+    data_inicial: str,
+    data_final: str,
+    uf: str | None,
+    max_paginas: int,
+) -> Iterator[dict[str, Any]]:
+    """Dispensa/Inexigibilidade não têm fase de proposta competitiva, então
+    usa /contratacoes/publicacao (filtra por data de publicação) em vez de
+    /contratacoes/proposta."""
+    pagina = 1
+    while pagina <= max_paginas:
+        params: dict[str, Any] = {
+            "codigoModalidadeContratacao": codigo_modalidade,
+            "dataInicial": data_inicial,
+            "dataFinal": data_final,
+            "pagina": pagina,
+            "tamanhoPagina": PAGE_SIZE,
+        }
+        if uf:
+            params["uf"] = uf
+        resp = _get_com_retry(session, f"{PNCP_BASE_URL}/contratacoes/publicacao", params)
+        if resp.status_code == 204:
+            return
+        resp.raise_for_status()
+        payload = resp.json()
+        dados = payload.get("data") or []
+        if not dados:
+            return
+        yield from dados
+
+        total_paginas = payload.get("totalPaginas") or pagina
+        if pagina >= total_paginas:
+            return
+        pagina += 1
+        time.sleep(1.5)
+
+
 def buscar_licitacoes_abertas() -> list[Licitacao]:
     hoje = date.today()
     data_final = (hoje + timedelta(days=LOOKAHEAD_DIAS_PROPOSTA)).strftime("%Y%m%d")
@@ -319,6 +370,28 @@ def buscar_licitacoes_abertas() -> list[Licitacao]:
                                 continue
                         except ValueError:
                             pass
+                    encontradas[licitacao.numero_controle] = licitacao
+                    achados += 1
+            except requests.RequestException as exc:
+                print(f"[aviso] falha ao consultar modalidade {codigo_modalidade} ({escopo}): {exc}", file=sys.stderr)
+            print(f"[info] {escopo}/modalidade {codigo_modalidade}: {escaneados} escaneados, {achados} bateram no filtro")
+
+    # Dispensa/Inexigibilidade: sem janela de proposta, então usa "publicado
+    # recentemente" (últimos PUBLICACAO_JANELA_DIAS dias) como substituto de "aberto".
+    data_inicial_publicacao = (hoje - timedelta(days=PUBLICACAO_JANELA_DIAS)).strftime("%Y%m%d")
+    data_final_publicacao = hoje.strftime("%Y%m%d")
+    for uf, max_paginas, escopo in (("SP", MAX_PAGINAS_SP, "SP"), (None, MAX_PAGINAS_NACIONAL, "nacional")):
+        for codigo_modalidade in MODALIDADES_DIRETAS:
+            escaneados = 0
+            achados = 0
+            try:
+                for item in buscar_modalidade_publicacao(
+                    session, codigo_modalidade, data_inicial_publicacao, data_final_publicacao, uf, max_paginas
+                ):
+                    escaneados += 1
+                    licitacao = parse_item(item)
+                    if licitacao is None:
+                        continue
                     encontradas[licitacao.numero_controle] = licitacao
                     achados += 1
             except requests.RequestException as exc:

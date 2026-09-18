@@ -26,9 +26,13 @@ Filtra São Paulo e nacional, e publica os achados em dois canais do Slack:
 
 - `.github/workflows/pncp-licitacoes.yml` roda toda segunda-feira às 09:00
   (horário de Brasília) via GitHub Actions, ou sob demanda (`workflow_dispatch`).
-- `scripts/pncp_licitacoes.py` consulta a API pública de Consulta do PNCP
-  (`/v1/contratacoes/proposta`), filtra por palavras-chave de segmento e de
-  sinal de importação, e posta no Slack via `chat.postMessage`.
+- `scripts/pncp_licitacoes.py` consulta a API pública de Consulta do PNCP:
+  `/v1/contratacoes/proposta` para modalidades competitivas (Concorrência,
+  Pregão, Diálogo Competitivo — têm janela de proposta) e
+  `/v1/contratacoes/publicacao` para Dispensa/Inexigibilidade (contratação
+  direta, sem fase de proposta — usa "publicado nos últimos 14 dias" como
+  substituto de "aberto"). Filtra por palavras-chave de segmento e de sinal
+  de importação, e posta no Slack via `chat.postMessage`.
 - `data/licitacoes_estado.json` guarda o que já foi notificado (evita
   duplicidade) e as datas de encerramento, para gerar os alertas de follow-up.
   É atualizado e commitado pelo próprio workflow a cada execução.
