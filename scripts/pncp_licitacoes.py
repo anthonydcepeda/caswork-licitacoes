@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 import time
 import unicodedata
@@ -101,7 +102,7 @@ SEGMENT_KEYWORDS: dict[str, list[str]] = {
 }
 
 IMPORT_SIGNAL_KEYWORDS = [
-    "importad",  # importado/importados/importada/importadas
+    "importad",  # importado/importados/importada/importadas (prefixo, sem borda direita)
     "importacao",
     "fabricacao estrangeira",
     "licitacao internacional",
@@ -118,10 +119,24 @@ def normalizar(texto: str) -> str:
     return sem_acento.lower()
 
 
+def _termo_para_regex(termo: str) -> re.Pattern[str]:
+    # "importad" é um radical proposital (importado/importada/importados/...):
+    # só precisa de borda à esquerda, o \w* consome o resto da palavra.
+    if termo == "importad":
+        return re.compile(r"\bimportad\w*")
+    return re.compile(r"\b" + re.escape(termo) + r"\b")
+
+
+_SEGMENT_PATTERNS = {nome: [_termo_para_regex(t) for t in termos] for nome, termos in SEGMENT_KEYWORDS.items()}
+_IMPORT_PATTERNS = [_termo_para_regex(t) for t in IMPORT_SIGNAL_KEYWORDS]
+
+
 def classificar_objeto(objeto: str) -> tuple[list[str], bool]:
+    """Usa borda de palavra (\\b) para evitar falsos positivos tipo
+    "scada" casando dentro de "escadarias" (regularização de escadarias)."""
     norm = normalizar(objeto)
-    segmentos = [nome for nome, termos in SEGMENT_KEYWORDS.items() if any(t in norm for t in termos)]
-    sinal_importacao = any(t in norm for t in IMPORT_SIGNAL_KEYWORDS)
+    segmentos = [nome for nome, padroes in _SEGMENT_PATTERNS.items() if any(p.search(norm) for p in padroes)]
+    sinal_importacao = any(p.search(norm) for p in _IMPORT_PATTERNS)
     return segmentos, sinal_importacao
 
 
@@ -154,7 +169,10 @@ def montar_link(item: dict[str, Any]) -> str:
 def parse_item(item: dict[str, Any]) -> Licitacao | None:
     objeto = item.get("objetoCompra") or ""
     segmentos, sinal_importacao = classificar_objeto(objeto)
-    if not segmentos:
+    # Exige segmento de interesse E sinal explícito de importação: um objeto
+    # que só cita "gerador"/"subestação"/"transformador" de passagem dentro de
+    # uma obra civil qualquer não é o que se busca aqui (muito ruído/falso positivo).
+    if not segmentos or not sinal_importacao:
         return None
 
     orgao = item.get("orgaoEntidade") or {}
@@ -261,10 +279,9 @@ def formatar_data(data_iso: str | None) -> str:
 
 
 def bloco_licitacao(licitacao: Licitacao, prefixo: str = "") -> dict[str, Any]:
-    tag = "🌍 *possível importado*" if licitacao.sinal_importacao else "🔎 candidato (verificar)"
     texto = (
         f"{prefixo}*{licitacao.orgao}* — {licitacao.municipio}/{licitacao.uf}\n"
-        f"{tag} · _{', '.join(licitacao.segmentos)}_\n"
+        f"🌍 *possível importado* · _{', '.join(licitacao.segmentos)}_\n"
         f"*Objeto:* {licitacao.objeto}\n"
         f"*Valor estimado:* {formatar_valor(licitacao.valor_estimado)}   "
         f"*Modalidade:* {licitacao.modalidade}\n"
@@ -305,7 +322,7 @@ def main() -> None:
     licitacoes = buscar_licitacoes_abertas()
 
     novas = [l for l in licitacoes if l.numero_controle not in estado]
-    novas.sort(key=lambda l: (not l.sinal_importacao, -(l.valor_estimado or 0)))
+    novas.sort(key=lambda l: -(l.valor_estimado or 0))
 
     if novas:
         blocos = [{"type": "header", "text": {"type": "plain_text", "text": f"📋 {len(novas)} nova(s) licitação(ões) — {hoje.strftime('%d/%m/%Y')}"}}]
