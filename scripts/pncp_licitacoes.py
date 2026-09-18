@@ -47,7 +47,7 @@ PAGE_SIZE = 50
 # de baixar os resultados. SP é sempre varrido por completo (universo menor);
 # o restante do país tem um teto maior pra não deixar o job rodando por horas.
 MAX_PAGINAS_SP = 100
-MAX_PAGINAS_NACIONAL = 300
+MAX_PAGINAS_NACIONAL = 150
 LOOKAHEAD_DIAS_PROPOSTA = 120  # janela de busca de prazos de encerramento
 FOLLOWUP_ALERTA_DIAS = 7  # avisa no follow-up quando faltar <= N dias para o prazo
 
@@ -240,6 +240,20 @@ def parse_item(item: dict[str, Any]) -> Licitacao | None:
     )
 
 
+def _get_com_retry(session: requests.Session, url: str, params: dict[str, Any], max_tentativas: int = 6) -> requests.Response:
+    espera = 2.0
+    for tentativa in range(1, max_tentativas + 1):
+        resp = session.get(url, params=params, timeout=REQUEST_TIMEOUT)
+        if resp.status_code != 429:
+            return resp
+        retry_after = resp.headers.get("Retry-After")
+        espera_efetiva = float(retry_after) if retry_after else espera
+        print(f"[aviso] 429 da API do PNCP, aguardando {espera_efetiva:.1f}s (tentativa {tentativa}/{max_tentativas})", file=sys.stderr)
+        time.sleep(espera_efetiva)
+        espera = min(espera * 2, 60.0)
+    return resp
+
+
 def buscar_modalidade(
     session: requests.Session,
     codigo_modalidade: int,
@@ -257,7 +271,7 @@ def buscar_modalidade(
         }
         if uf:
             params["uf"] = uf
-        resp = session.get(f"{PNCP_BASE_URL}/contratacoes/proposta", params=params, timeout=REQUEST_TIMEOUT)
+        resp = _get_com_retry(session, f"{PNCP_BASE_URL}/contratacoes/proposta", params)
         if resp.status_code == 204:
             return
         resp.raise_for_status()
@@ -271,7 +285,7 @@ def buscar_modalidade(
         if pagina >= total_paginas:
             return
         pagina += 1
-        time.sleep(0.2)
+        time.sleep(1.5)
 
 
 def buscar_licitacoes_abertas() -> list[Licitacao]:
