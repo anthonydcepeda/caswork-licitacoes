@@ -1,0 +1,44 @@
+name: Busca semanal de licitações PNCP (equipamentos importados)
+
+on:
+  schedule:
+    # Segunda-feira, 09:00 horário de Brasília (12:00 UTC)
+    - cron: "0 12 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pncp-licitacoes
+  cancel-in-progress: false
+
+jobs:
+  buscar-e-notificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Buscar licitações e notificar no Slack
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_CAPTACAO: ${{ vars.SLACK_CHANNEL_CAPTACAO }}
+          SLACK_CHANNEL_FOLLOWUP: ${{ vars.SLACK_CHANNEL_FOLLOWUP }}
+        run: python scripts/pncp_licitacoes.py
+
+      - name: Persistir estado atualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/licitacoes_estado.json
+          git diff --cached --quiet || git commit -m "chore: atualiza estado de licitações monitoradas"
+          git push
