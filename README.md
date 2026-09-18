@@ -1,16 +1,22 @@
 # caswork-licitacoes
 
 Busca automática, semanal, de licitações abertas no PNCP (Portal Nacional de
-Contratações Públicas) com potencial de **equipamento importado** nos
-segmentos:
+Contratações Públicas) em duas categorias:
 
-- Automação industrial
-- Energia (transformadores, geradores, armazenamento de energia/BESS)
-- Óleo & gás
+1. **Equipamento importado** — editais que combinam um segmento de interesse
+   (automação industrial; energia — transformadores, geradores, armazenamento
+   de energia/BESS; óleo & gás) **com** um sinal explícito de importação no
+   objeto ("importado", "fabricação estrangeira", "licitação internacional"
+   etc). As duas condições são exigidas juntas para evitar ruído — muitos
+   editais de obra civil citam "gerador" ou "subestação" de passagem sem ter
+   nenhuma relação com equipamento importado.
+2. **Comércio exterior / logística internacional** — editais em que o órgão
+   quer *contratar* esse tipo de serviço diretamente (despachante aduaneiro,
+   agente de carga, operador logístico internacional, assessoria em comércio
+   exterior etc.) — oportunidade de negócio direta pra Caswork, não depende
+   de sinal de importação adicional.
 
-Filtra São Paulo e nacional, prioriza editais cujo objeto sinalize termos como
-"importado", "fabricação estrangeira", "licitação internacional", e publica os
-achados em dois canais do Slack:
+Filtra São Paulo e nacional, e publica os achados em dois canais do Slack:
 
 - **#caswork-licitacoes** — captação: licitações novas encontradas a cada execução.
 - **#followup-licitacoes** — acompanhamento: alerta quando o prazo de proposta
@@ -52,8 +58,11 @@ validar antes de deixar no automático.
 
 ## Ajustando os filtros
 
-As listas de palavras-chave de segmento e de sinal de importação ficam no
-topo de `scripts/pncp_licitacoes.py` (`SEGMENT_KEYWORDS` e
-`IMPORT_SIGNAL_KEYWORDS`). Ajuste/adicione termos conforme os resultados forem
+As listas de palavras-chave ficam no topo de `scripts/pncp_licitacoes.py`:
+`SEGMENT_KEYWORDS` + `IMPORT_SIGNAL_KEYWORDS` (categoria "equipamento
+importado") e `COMEX_KEYWORDS` (categoria "comércio exterior/logística
+internacional"). Ajuste/adicione termos conforme os resultados forem
 aparecendo — a API do PNCP não permite busca por palavra-chave no lado do
-servidor, então o filtro é sempre feito no texto do objeto após a consulta.
+servidor, então o filtro é sempre feito no texto do objeto após a consulta,
+usando borda de palavra (`\b`) pra evitar falsos positivos por substring
+(ex: "scada" não deve casar dentro de "escadarias").

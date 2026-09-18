@@ -113,6 +113,32 @@ IMPORT_SIGNAL_KEYWORDS = [
     "nacionalizacao aduaneira",
 ]
 
+CATEGORIA_COMEX = "Comércio exterior / logística internacional"
+
+# Editais de CONTRATAÇÃO de serviço de comércio exterior/logística
+# internacional — oportunidade direta pra Caswork, não depende de sinal de
+# importação (o próprio termo já é o serviço buscado).
+COMEX_KEYWORDS = [
+    "despachante aduaneiro",
+    "despacho aduaneiro",
+    "agente de carga",
+    "agenciamento de carga internacional",
+    "comercio exterior",
+    "operador logistico internacional",
+    "logistica internacional",
+    "gestao de importacao",
+    "gestao de exportacao",
+    "assessoria em comercio exterior",
+    "consultoria em comercio exterior",
+    "regime aduaneiro especial",
+    "recinto alfandegado",
+    "siscomex",
+    "drawback",
+    "licenciamento de importacao",
+    "importacao e exportacao de mercadorias",
+    "trading company",
+]
+
 
 def normalizar(texto: str) -> str:
     sem_acento = unicodedata.normalize("NFKD", texto or "").encode("ascii", "ignore").decode()
@@ -129,15 +155,32 @@ def _termo_para_regex(termo: str) -> re.Pattern[str]:
 
 _SEGMENT_PATTERNS = {nome: [_termo_para_regex(t) for t in termos] for nome, termos in SEGMENT_KEYWORDS.items()}
 _IMPORT_PATTERNS = [_termo_para_regex(t) for t in IMPORT_SIGNAL_KEYWORDS]
+_COMEX_PATTERNS = [_termo_para_regex(t) for t in COMEX_KEYWORDS]
 
 
-def classificar_objeto(objeto: str) -> tuple[list[str], bool]:
+def classificar_objeto(objeto: str) -> list[str]:
     """Usa borda de palavra (\\b) para evitar falsos positivos tipo
-    "scada" casando dentro de "escadarias" (regularização de escadarias)."""
+    "scada" casando dentro de "escadarias" (regularização de escadarias).
+
+    Duas categorias independentes, um objeto pode cair em uma, na outra, ou
+    nas duas:
+    - Equipamento importado: precisa de segmento (automação/energia/óleo&gás)
+      E sinal explícito de importação no texto (senão é ruído genérico).
+    - Comércio exterior / logística internacional: contratação direta desse
+      tipo de serviço — o próprio termo já é a oportunidade, não precisa de
+      sinal de importação adicional.
+    """
     norm = normalizar(objeto)
-    segmentos = [nome for nome, padroes in _SEGMENT_PATTERNS.items() if any(p.search(norm) for p in padroes)]
+
+    segmentos_equipamento = [nome for nome, padroes in _SEGMENT_PATTERNS.items() if any(p.search(norm) for p in padroes)]
     sinal_importacao = any(p.search(norm) for p in _IMPORT_PATTERNS)
-    return segmentos, sinal_importacao
+
+    segmentos: list[str] = []
+    if segmentos_equipamento and sinal_importacao:
+        segmentos.extend(segmentos_equipamento)
+    if any(p.search(norm) for p in _COMEX_PATTERNS):
+        segmentos.append(CATEGORIA_COMEX)
+    return segmentos
 
 
 @dataclass
@@ -153,7 +196,6 @@ class Licitacao:
     encerramento_proposta: str | None
     link: str
     segmentos: list[str] = field(default_factory=list)
-    sinal_importacao: bool = False
 
 
 def montar_link(item: dict[str, Any]) -> str:
@@ -168,11 +210,8 @@ def montar_link(item: dict[str, Any]) -> str:
 
 def parse_item(item: dict[str, Any]) -> Licitacao | None:
     objeto = item.get("objetoCompra") or ""
-    segmentos, sinal_importacao = classificar_objeto(objeto)
-    # Exige segmento de interesse E sinal explícito de importação: um objeto
-    # que só cita "gerador"/"subestação"/"transformador" de passagem dentro de
-    # uma obra civil qualquer não é o que se busca aqui (muito ruído/falso positivo).
-    if not segmentos or not sinal_importacao:
+    segmentos = classificar_objeto(objeto)
+    if not segmentos:
         return None
 
     orgao = item.get("orgaoEntidade") or {}
@@ -193,7 +232,6 @@ def parse_item(item: dict[str, Any]) -> Licitacao | None:
         encerramento_proposta=item.get("dataEncerramentoProposta"),
         link=montar_link(item),
         segmentos=segmentos,
-        sinal_importacao=sinal_importacao,
     )
 
 
@@ -279,9 +317,10 @@ def formatar_data(data_iso: str | None) -> str:
 
 
 def bloco_licitacao(licitacao: Licitacao, prefixo: str = "") -> dict[str, Any]:
+    tag = "🚢 *comércio exterior/logística*" if CATEGORIA_COMEX in licitacao.segmentos else "🌍 *possível importado*"
     texto = (
         f"{prefixo}*{licitacao.orgao}* — {licitacao.municipio}/{licitacao.uf}\n"
-        f"🌍 *possível importado* · _{', '.join(licitacao.segmentos)}_\n"
+        f"{tag} · _{', '.join(licitacao.segmentos)}_\n"
         f"*Objeto:* {licitacao.objeto}\n"
         f"*Valor estimado:* {formatar_valor(licitacao.valor_estimado)}   "
         f"*Modalidade:* {licitacao.modalidade}\n"
@@ -387,7 +426,7 @@ def main() -> None:
             "valor_estimado": licitacao.valor_estimado,
             "encerramento_proposta": licitacao.encerramento_proposta,
             "link": licitacao.link,
-            "sinal_importacao": licitacao.sinal_importacao,
+            "segmentos": licitacao.segmentos,
             "primeira_captura": hoje.isoformat(),
             "alertado_followup": False,
         }
