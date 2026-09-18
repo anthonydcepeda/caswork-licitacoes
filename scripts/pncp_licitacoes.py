@@ -252,17 +252,38 @@ def parse_item(item: dict[str, Any]) -> Licitacao | None:
     )
 
 
+STATUS_CODES_COM_RETRY = {429, 502, 503, 504}
+
+
 def _get_com_retry(session: requests.Session, url: str, params: dict[str, Any], max_tentativas: int = 6) -> requests.Response:
+    """Tenta de novo com backoff exponencial em rate limit (429), erros
+    transitórios do servidor (502/503/504) e falhas de rede/timeout —
+    o PNCP costuma ter instabilidade temporária, não só limite de taxa."""
     espera = 2.0
+    ultimo_erro: requests.RequestException | None = None
+    resp: requests.Response | None = None
     for tentativa in range(1, max_tentativas + 1):
-        resp = session.get(url, params=params, timeout=REQUEST_TIMEOUT)
-        if resp.status_code != 429:
+        try:
+            resp = session.get(url, params=params, timeout=REQUEST_TIMEOUT)
+        except requests.RequestException as exc:
+            ultimo_erro = exc
+            print(f"[aviso] erro de rede ({exc.__class__.__name__}), aguardando {espera:.1f}s (tentativa {tentativa}/{max_tentativas})", file=sys.stderr)
+            time.sleep(espera)
+            espera = min(espera * 2, 60.0)
+            continue
+
+        ultimo_erro = None
+        if resp.status_code not in STATUS_CODES_COM_RETRY:
             return resp
         retry_after = resp.headers.get("Retry-After")
         espera_efetiva = float(retry_after) if retry_after else espera
-        print(f"[aviso] 429 da API do PNCP, aguardando {espera_efetiva:.1f}s (tentativa {tentativa}/{max_tentativas})", file=sys.stderr)
+        print(f"[aviso] {resp.status_code} da API do PNCP, aguardando {espera_efetiva:.1f}s (tentativa {tentativa}/{max_tentativas})", file=sys.stderr)
         time.sleep(espera_efetiva)
         espera = min(espera * 2, 60.0)
+
+    if ultimo_erro is not None:
+        raise ultimo_erro
+    assert resp is not None
     return resp
 
 
