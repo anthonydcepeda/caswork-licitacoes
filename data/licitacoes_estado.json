@@ -12,5 +12,33 @@
     ],
     "uf": "RO",
     "valor_estimado": 9600.0
+  },
+  "25648387000118-1-000186/2026": {
+    "alertado_followup": false,
+    "encerramento_proposta": "2026-10-08T09:00:00",
+    "link": "https://pncp.gov.br/app/editais/25648387000118/2026/186",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "Contratação de empresa especializada na prestação de serviços continuados de despacho aduaneiro, destinados à execução de atividades de desembaraço alfandegário de mercadorias importadas e exportadas, inclusive aquelas recebidas em doação, em caráter definitivo ou temporário, com ou sem cobertura cambial, bem como demais serviços correlatos, junto à Alfândega do Aeroporto Internacional de Confins/MG.",
+    "orgao": "UNIVERSIDADE FEDERAL DE UBERLANDIA",
+    "primeira_captura": "2026-10-05",
+    "segmentos": [
+      "Comércio exterior / logística internacional"
+    ],
+    "uf": "MG",
+    "valor_estimado": 69312.73
+  },
+  "86891363000180-1-000102/2026": {
+    "alertado_followup": false,
+    "encerramento_proposta": "2026-10-07T07:59:59",
+    "link": "https://pncp.gov.br/app/editais/86891363000180/2026/102",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "Contratação de serviços de despachante aduaneiro para equipamentos importados  (Microscópio de Fluorescência e GreenFeed Pasture Trailer)   Convênio nº 01.24.0714.00",
+    "orgao": "FUNDACAO UNIVERSIDADE ESTADUAL DE MATO GROSSO DO SUL",
+    "primeira_captura": "2026-10-05",
+    "segmentos": [
+      "Comércio exterior / logística internacional"
+    ],
+    "uf": "MS",
+    "valor_estimado": 22874.26
   }
 }
