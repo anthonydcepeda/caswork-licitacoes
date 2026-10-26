@@ -27,6 +27,34 @@
     "uf": "MG",
     "valor_estimado": 69312.73
   },
+  "28523215000106-1-000356/2026": {
+    "alertado_followup": false,
+    "encerramento_proposta": "2026-11-03T10:00:00",
+    "link": "https://pncp.gov.br/app/editais/28523215000106/2026/356",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "Contratação de serviços de despacho aduaneiro, bem como o desembaraço alfandegário de mercadorias importadas de diversos países, inclusive aquelas recebidas em doação, em caráter definitivo ou não, com ou sem cobertura cambial e mercadorias exportadas em caráter não definitivo (exportação temporária) a diversos países para fins de manutenção e calibração, atuando em consonância com as disposições estabelecidas na legislação relativa a serviços de despachante aduaneiro, com a finalidade de viabilizar a execução\nde importações e exportações diretas pela UFF.",
+    "orgao": "UNIVERSIDADE FEDERAL FLUMINENSE",
+    "primeira_captura": "2026-10-26",
+    "segmentos": [
+      "Comércio exterior / logística internacional"
+    ],
+    "uf": "RJ",
+    "valor_estimado": 1023165.0
+  },
+  "77996312000121-1-000312/2026": {
+    "alertado_followup": false,
+    "encerramento_proposta": null,
+    "link": "https://pncp.gov.br/app/editais/77996312000121/2026/312",
+    "modalidade": "Inexigibilidade",
+    "objeto": "Contratação direta, na modalidade inexigibilidade de licitação da SOLUÇÃO COMÉRCIO EXTERIOR LTDA CNP n. 13.237.1270-001-70 para ministrar a palestra no âmbito da Semana do Servidor com carga-horária de 01 uma hora de até 140 cento e quarenta participantes, na modalidade presencial tendo como público-alvo servidores do TCE/PR.",
+    "orgao": "TRIBUNAL DE CONTAS DO ESTADO DO PARANA",
+    "primeira_captura": "2026-10-26",
+    "segmentos": [
+      "Comércio exterior / logística internacional"
+    ],
+    "uf": "PR",
+    "valor_estimado": 3000.0
+  },
   "86891363000180-1-000102/2026": {
     "alertado_followup": false,
     "encerramento_proposta": "2026-10-07T07:59:59",
