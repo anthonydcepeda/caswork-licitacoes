@@ -154,6 +154,21 @@ COMEX_KEYWORDS = [
     "trading company",
 ]
 
+CATEGORIA_SUBESTACAO = "Equipamento de subestação / cabine primária"
+
+# Venda direta do produto (cabine primária, subestação de energia) — não
+# depende de sinal de importação, é o próprio equipamento sendo comprado.
+SUBESTACAO_KEYWORDS = [
+    "cabine primaria",
+    "subestacao de energia",
+    "subestacao abrigada",
+    "subestacao blindada",
+    "subestacao compacta",
+    "cubiculo blindado",
+    "quadro de distribuicao de energia",
+    "transformador de potencia",
+]
+
 
 def normalizar(texto: str) -> str:
     sem_acento = unicodedata.normalize("NFKD", texto or "").encode("ascii", "ignore").decode()
@@ -171,19 +186,21 @@ def _termo_para_regex(termo: str) -> re.Pattern[str]:
 _SEGMENT_PATTERNS = {nome: [_termo_para_regex(t) for t in termos] for nome, termos in SEGMENT_KEYWORDS.items()}
 _IMPORT_PATTERNS = [_termo_para_regex(t) for t in IMPORT_SIGNAL_KEYWORDS]
 _COMEX_PATTERNS = [_termo_para_regex(t) for t in COMEX_KEYWORDS]
+_SUBESTACAO_PATTERNS = [_termo_para_regex(t) for t in SUBESTACAO_KEYWORDS]
 
 
 def classificar_objeto(objeto: str) -> list[str]:
     """Usa borda de palavra (\\b) para evitar falsos positivos tipo
     "scada" casando dentro de "escadarias" (regularização de escadarias).
 
-    Duas categorias independentes, um objeto pode cair em uma, na outra, ou
-    nas duas:
+    Três categorias independentes, um objeto pode cair em uma ou mais:
     - Equipamento importado: precisa de segmento (automação/energia/óleo&gás)
       E sinal explícito de importação no texto (senão é ruído genérico).
     - Comércio exterior / logística internacional: contratação direta desse
       tipo de serviço — o próprio termo já é a oportunidade, não precisa de
       sinal de importação adicional.
+    - Equipamento de subestação / cabine primária: venda direta do produto,
+      também não depende de sinal de importação.
     """
     norm = normalizar(objeto)
 
@@ -195,6 +212,8 @@ def classificar_objeto(objeto: str) -> list[str]:
         segmentos.extend(segmentos_equipamento)
     if any(p.search(norm) for p in _COMEX_PATTERNS):
         segmentos.append(CATEGORIA_COMEX)
+    if any(p.search(norm) for p in _SUBESTACAO_PATTERNS):
+        segmentos.append(CATEGORIA_SUBESTACAO)
     return segmentos
 
 
@@ -448,7 +467,12 @@ def formatar_data(data_iso: str | None) -> str:
 
 
 def bloco_licitacao(licitacao: Licitacao, prefixo: str = "") -> dict[str, Any]:
-    tag = "🚢 *comércio exterior/logística*" if CATEGORIA_COMEX in licitacao.segmentos else "🌍 *possível importado*"
+    if CATEGORIA_COMEX in licitacao.segmentos:
+        tag = "🚢 *comércio exterior/logística*"
+    elif CATEGORIA_SUBESTACAO in licitacao.segmentos:
+        tag = "⚡ *equip. subestação/cabine primária*"
+    else:
+        tag = "🌍 *possível importado*"
     texto = (
         f"{prefixo}*{licitacao.orgao}* — {licitacao.municipio}/{licitacao.uf}\n"
         f"{tag} · _{', '.join(licitacao.segmentos)}_\n"

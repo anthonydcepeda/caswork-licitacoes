@@ -1,7 +1,7 @@
 # caswork-licitacoes
 
 Busca automática, semanal, de licitações abertas no PNCP (Portal Nacional de
-Contratações Públicas) em duas categorias:
+Contratações Públicas) em três categorias:
 
 1. **Equipamento importado** — editais que combinam um segmento de interesse
    (automação industrial; energia — transformadores, geradores, armazenamento
@@ -15,6 +15,10 @@ Contratações Públicas) em duas categorias:
    agente de carga, operador logístico internacional, assessoria em comércio
    exterior etc.) — oportunidade de negócio direta pra Caswork, não depende
    de sinal de importação adicional.
+3. **Equipamento de subestação / cabine primária** — editais de venda direta
+   desse produto específico (cabine primária, subestação de energia,
+   transformador de potência) — também não depende de sinal de importação,
+   é o próprio equipamento sendo comprado pelo órgão.
 
 Filtra São Paulo e nacional, e publica os achados em dois canais do Slack:
 
