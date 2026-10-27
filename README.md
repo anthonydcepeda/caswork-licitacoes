@@ -1,6 +1,6 @@
 # caswork-licitacoes
 
-Busca automática, semanal, de licitações abertas no PNCP (Portal Nacional de
+Busca automática, diária, de licitações abertas no PNCP (Portal Nacional de
 Contratações Públicas) em quatro categorias:
 
 1. **Equipamento importado** — editais que combinam um segmento de interesse
@@ -33,7 +33,7 @@ Filtra São Paulo e nacional, e publica os achados em dois canais do Slack:
 
 ## Como funciona
 
-- `.github/workflows/pncp-licitacoes.yml` roda toda segunda-feira às 09:00
+- `.github/workflows/pncp-licitacoes.yml` roda todo dia às 09:00
   (horário de Brasília) via GitHub Actions, ou sob demanda (`workflow_dispatch`).
 - `scripts/pncp_licitacoes.py` consulta a API pública de Consulta do PNCP:
   `/v1/contratacoes/proposta` para modalidades competitivas (Concorrência,
@@ -66,15 +66,17 @@ deste repositório:
 - `SLACK_CHANNEL_FOLLOWUP`: `C0C2YA6R7DX` (#followup-licitacoes)
 
 Depois de configurar os dois itens acima, rode o workflow manualmente uma vez
-(aba **Actions** → "Busca semanal de licitações PNCP" → **Run workflow**) para
+(aba **Actions** → "Busca diária de licitações PNCP" → **Run workflow**) para
 validar antes de deixar no automático.
 
 ## Ajustando os filtros
 
 As listas de palavras-chave ficam no topo de `scripts/pncp_licitacoes.py`:
 `SEGMENT_KEYWORDS` + `IMPORT_SIGNAL_KEYWORDS` (categoria "equipamento
-importado") e `COMEX_KEYWORDS` (categoria "comércio exterior/logística
-internacional"). Ajuste/adicione termos conforme os resultados forem
+importado"), `COMEX_KEYWORDS` (comércio exterior/logística internacional),
+`SUBESTACAO_KEYWORDS` (equipamento de subestação/cabine primária) e
+`BESS_TERMOS` + `ACAO_ENGENHARIA_TERMOS` (engenharia de instalação de BESS).
+Ajuste/adicione termos conforme os resultados forem
 aparecendo — a API do PNCP não permite busca por palavra-chave no lado do
 servidor, então o filtro é sempre feito no texto do objeto após a consulta,
 usando borda de palavra (`\b`) pra evitar falsos positivos por substring

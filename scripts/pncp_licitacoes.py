@@ -565,7 +565,7 @@ def main() -> None:
         enviar_slack(
             slack_token,
             canal_captacao,
-            [{"type": "section", "text": {"type": "mrkdwn", "text": f"Nenhuma licitação nova encontrada esta semana ({hoje.strftime('%d/%m/%Y')})."}}],
+            [{"type": "section", "text": {"type": "mrkdwn", "text": f"Nenhuma licitação nova encontrada hoje ({hoje.strftime('%d/%m/%Y')})."}}],
             texto_fallback="Nenhuma licitação nova",
         )
 

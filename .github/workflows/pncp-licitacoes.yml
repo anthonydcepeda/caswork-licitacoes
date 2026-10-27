@@ -1,9 +1,9 @@
-name: Busca semanal de licitações PNCP (equipamentos importados)
+name: Busca diária de licitações PNCP (equipamentos importados)
 
 on:
   schedule:
-    # Segunda-feira, 09:00 horário de Brasília (12:00 UTC)
-    - cron: "0 12 * * 1"
+    # Todo dia, 09:00 horário de Brasília (12:00 UTC)
+    - cron: "0 12 * * *"
   workflow_dispatch: {}
 
 permissions:
