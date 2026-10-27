@@ -1,7 +1,7 @@
 # caswork-licitacoes
 
 Busca automática, semanal, de licitações abertas no PNCP (Portal Nacional de
-Contratações Públicas) em três categorias:
+Contratações Públicas) em quatro categorias:
 
 1. **Equipamento importado** — editais que combinam um segmento de interesse
    (automação industrial; energia — transformadores, geradores, armazenamento
@@ -19,6 +19,11 @@ Contratações Públicas) em três categorias:
    desse produto específico (cabine primária, subestação de energia,
    transformador de potência) — também não depende de sinal de importação,
    é o próprio equipamento sendo comprado pelo órgão.
+4. **Engenharia de instalação de BESS** — contratação de empresa de
+   engenharia pra instalar/integrar um sistema BESS. Exige um termo de
+   BESS/bateria E um termo de ação de engenharia (instalação, integração,
+   comissionamento etc.) juntos, pra pegar variações de texto como
+   "instalação de **sistema** BESS" sem depender de frase fixa.
 
 Filtra São Paulo e nacional, e publica os achados em dois canais do Slack:
 

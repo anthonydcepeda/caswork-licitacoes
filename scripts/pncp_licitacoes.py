@@ -169,6 +169,31 @@ SUBESTACAO_KEYWORDS = [
     "transformador de potencia",
 ]
 
+CATEGORIA_BESS_ENGENHARIA = "Engenharia de instalação de BESS"
+
+# Contratação de empresa de engenharia para instalar/integrar um sistema
+# BESS — oportunidade de serviço, não de equipamento; qualifica sozinho.
+# AND de dois radicais (termo de BESS + termo de ação de engenharia) em vez
+# de frases fixas, pra pegar variações como "instalação de SISTEMA BESS".
+BESS_TERMOS = [
+    "bess",
+    "battery energy storage",
+    "sistema de armazenamento de energia",
+    "banco de baterias",
+]
+ACAO_ENGENHARIA_TERMOS = [
+    "instalacao",
+    "implantacao",
+    "montagem",
+    "integracao",
+    "comissionamento",
+    "engenharia",
+    "epc",
+    "projeto executivo",
+    "projeto basico",
+]
+
+
 
 def normalizar(texto: str) -> str:
     sem_acento = unicodedata.normalize("NFKD", texto or "").encode("ascii", "ignore").decode()
@@ -187,13 +212,15 @@ _SEGMENT_PATTERNS = {nome: [_termo_para_regex(t) for t in termos] for nome, term
 _IMPORT_PATTERNS = [_termo_para_regex(t) for t in IMPORT_SIGNAL_KEYWORDS]
 _COMEX_PATTERNS = [_termo_para_regex(t) for t in COMEX_KEYWORDS]
 _SUBESTACAO_PATTERNS = [_termo_para_regex(t) for t in SUBESTACAO_KEYWORDS]
+_BESS_PATTERNS = [_termo_para_regex(t) for t in BESS_TERMOS]
+_ACAO_ENGENHARIA_PATTERNS = [_termo_para_regex(t) for t in ACAO_ENGENHARIA_TERMOS]
 
 
 def classificar_objeto(objeto: str) -> list[str]:
     """Usa borda de palavra (\\b) para evitar falsos positivos tipo
     "scada" casando dentro de "escadarias" (regularização de escadarias).
 
-    Três categorias independentes, um objeto pode cair em uma ou mais:
+    Categorias independentes, um objeto pode cair em uma ou mais:
     - Equipamento importado: precisa de segmento (automação/energia/óleo&gás)
       E sinal explícito de importação no texto (senão é ruído genérico).
     - Comércio exterior / logística internacional: contratação direta desse
@@ -201,6 +228,9 @@ def classificar_objeto(objeto: str) -> list[str]:
       sinal de importação adicional.
     - Equipamento de subestação / cabine primária: venda direta do produto,
       também não depende de sinal de importação.
+    - Engenharia de instalação de BESS: termo de BESS/bateria E termo de ação
+      de engenharia (instalação, integração, comissionamento etc.) juntos —
+      pega variações de texto como "instalação de sistema BESS".
     """
     norm = normalizar(objeto)
 
@@ -214,6 +244,8 @@ def classificar_objeto(objeto: str) -> list[str]:
         segmentos.append(CATEGORIA_COMEX)
     if any(p.search(norm) for p in _SUBESTACAO_PATTERNS):
         segmentos.append(CATEGORIA_SUBESTACAO)
+    if any(p.search(norm) for p in _BESS_PATTERNS) and any(p.search(norm) for p in _ACAO_ENGENHARIA_PATTERNS):
+        segmentos.append(CATEGORIA_BESS_ENGENHARIA)
     return segmentos
 
 
@@ -228,6 +260,7 @@ class Licitacao:
     modalidade: str
     abertura_proposta: str | None
     encerramento_proposta: str | None
+    data_publicacao: str | None
     link: str
     segmentos: list[str] = field(default_factory=list)
 
@@ -266,6 +299,7 @@ def parse_item(item: dict[str, Any]) -> Licitacao | None:
         or MODALIDADES_DIRETAS.get(item.get("codigoModalidadeContratacao"), ""),
         abertura_proposta=item.get("dataAberturaProposta"),
         encerramento_proposta=item.get("dataEncerramentoProposta"),
+        data_publicacao=item.get("dataPublicacaoPncp"),
         link=montar_link(item),
         segmentos=segmentos,
     )
@@ -471,6 +505,8 @@ def bloco_licitacao(licitacao: Licitacao, prefixo: str = "") -> dict[str, Any]:
         tag = "🚢 *comércio exterior/logística*"
     elif CATEGORIA_SUBESTACAO in licitacao.segmentos:
         tag = "⚡ *equip. subestação/cabine primária*"
+    elif CATEGORIA_BESS_ENGENHARIA in licitacao.segmentos:
+        tag = "🔋 *engenharia de instalação BESS*"
     else:
         tag = "🌍 *possível importado*"
     texto = (
@@ -479,6 +515,7 @@ def bloco_licitacao(licitacao: Licitacao, prefixo: str = "") -> dict[str, Any]:
         f"*Objeto:* {licitacao.objeto}\n"
         f"*Valor estimado:* {formatar_valor(licitacao.valor_estimado)}   "
         f"*Modalidade:* {licitacao.modalidade}\n"
+        f"*Publicado em:* {formatar_data(licitacao.data_publicacao)}   "
         f"*Prazo proposta:* {formatar_data(licitacao.encerramento_proposta)}\n"
         f"<{licitacao.link}|Abrir edital no PNCP>"
     )
@@ -562,6 +599,7 @@ def main() -> None:
                             "text": (
                                 f"*{registro.get('orgao', '(órgão não informado)')}*\n"
                                 f"*Objeto:* {registro.get('objeto', '')}\n"
+                                f"*Publicado em:* {formatar_data(registro.get('data_publicacao'))}\n"
                                 f"*Prazo proposta:* {formatar_data(registro.get('encerramento_proposta'))}\n"
                                 f"<{registro.get('link', '')}|Abrir edital no PNCP>"
                             ),
@@ -580,6 +618,7 @@ def main() -> None:
             "modalidade": licitacao.modalidade,
             "valor_estimado": licitacao.valor_estimado,
             "encerramento_proposta": licitacao.encerramento_proposta,
+            "data_publicacao": licitacao.data_publicacao,
             "link": licitacao.link,
             "segmentos": licitacao.segmentos,
             "primeira_captura": hoje.isoformat(),
