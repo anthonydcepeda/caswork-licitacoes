@@ -250,7 +250,7 @@
     "valor_estimado": 22874.26
   },
   "87592861000194-1-000441/2026": {
-    "alertado_followup": false,
+    "alertado_followup": true,
     "data_publicacao": "2026-10-17T08:32:03",
     "encerramento_proposta": "2026-11-09T08:50:00",
     "link": "https://pncp.gov.br/app/editais/87592861000194/2026/441",
