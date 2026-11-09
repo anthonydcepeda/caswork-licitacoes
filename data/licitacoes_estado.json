@@ -1,4 +1,19 @@
 {
+  "00394502000144-1-014439/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-10-26T14:56:02",
+    "encerramento_proposta": "2026-11-03T12:00:00",
+    "link": "https://pncp.gov.br/app/editais/00394502000144/2026/14439",
+    "modalidade": "Dispensa",
+    "objeto": "Manutenção preventiva da subestação de energia elétrica (SE), dos seus quadros de distribuição e do do Grupo Gerador de emergência (Conforme relação de serviços do item 1.11, tabela 1 - Relação de serviços do Termo de Referência).",
+    "orgao": "COMANDO DA MARINHA",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "RJ",
+    "valor_estimado": 25496.76
+  },
   "00444232000139-1-001381/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-10-22T11:47:44",
@@ -13,6 +28,21 @@
     ],
     "uf": "DF",
     "valor_estimado": 2322.0
+  },
+  "00444232000139-1-001399/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-10-23T04:00:13",
+    "encerramento_proposta": "2026-11-17T09:00:00",
+    "link": "https://pncp.gov.br/app/editais/00444232000139/2026/1399",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "CONTRATAÇÃO DE EMPRESA ESPECIALIZADA EM SERVIÇOS CONTINUADOS DE DESPACHO E DESEMBARAÇO ADUANEIRO DE COMERCIO EXTERIOR",
+    "orgao": "INDUSTRIA DE MATERIAL BELICO DO BRASIL IMBEL",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Comércio exterior / logística internacional"
+    ],
+    "uf": "MG",
+    "valor_estimado": 500000.0
   },
   "04407029000143-1-000055/2026": {
     "alertado_followup": false,
@@ -58,6 +88,36 @@
     "uf": "PB",
     "valor_estimado": 64000.0
   },
+  "12320017000105-1-000038/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-10-26T10:41:10",
+    "encerramento_proposta": null,
+    "link": "https://pncp.gov.br/app/editais/12320017000105/2026/38",
+    "modalidade": "Dispensa",
+    "objeto": "AQUISIÇÃO DE NOBREAK SENOIDAL DE 5.000 VA, KIT DE CONEXÃO PARA BANCO DE BATERIAS E DEMAIS MATERIAIS COMPLEMENTARES, INCLUINDO FORNECIMENTO, INSTALAÇÃO, CONFIGURAÇÃO, TESTES DE FUNCIONAMENTO E ENTREGA DO SISTEMA EM PERFEITAS CONDIÇÕES DE OPERAÇÃO, DESTINADOS À IMPLANTAÇÃO DE NOVO SISTEMA DE ALIMENTAÇÃO ININTERRUPTA (UPS) NA UNIDADE BÁSICA DE SAÚDE DO MUNICÍPIO DE SUL BRASIL/SC, VISANDO PROTEGER OS EQUIPAMENTOS ELETRÔNICOS, GARANTIR A CONTINUIDADE DOS SISTEMAS INFORMATIZADOS E ASSEGURAR A PRESTAÇÃO ININTERRUPTA DOS SERVIÇOS PÚBLICOS DE SAÚDE.",
+    "orgao": "FUNDO MUNICIPAL DE SAUDE",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Engenharia de instalação de BESS"
+    ],
+    "uf": "SC",
+    "valor_estimado": 15840.64
+  },
+  "13183513000127-1-000201/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-10-23T00:00:59",
+    "encerramento_proposta": "2026-11-10T09:00:00",
+    "link": "https://pncp.gov.br/app/editais/13183513000127/2026/201",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "CONTRATAÇÃO DE SERVIÇO DE REFORMA DA SUBESTAÇÃO DE ENERGIA ELÉTRICA DO HOSPITAL MUNICIPAL GETÚLIO VARGAS, EM SAPUCAIA DO SUL/RS.",
+    "orgao": "FUNDACAO DE SAUDE SAPUCAIA DO SUL",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "RS",
+    "valor_estimado": 0.0
+  },
   "15126437000305-1-004422/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-10-27T04:00:32",
@@ -88,22 +148,8 @@
     "uf": "MG",
     "valor_estimado": 10957650.33
   },
-  "25648387000118-1-000186/2026": {
-    "alertado_followup": false,
-    "encerramento_proposta": "2026-10-08T09:00:00",
-    "link": "https://pncp.gov.br/app/editais/25648387000118/2026/186",
-    "modalidade": "Pregão - Eletrônico",
-    "objeto": "Contratação de empresa especializada na prestação de serviços continuados de despacho aduaneiro, destinados à execução de atividades de desembaraço alfandegário de mercadorias importadas e exportadas, inclusive aquelas recebidas em doação, em caráter definitivo ou temporário, com ou sem cobertura cambial, bem como demais serviços correlatos, junto à Alfândega do Aeroporto Internacional de Confins/MG.",
-    "orgao": "UNIVERSIDADE FEDERAL DE UBERLANDIA",
-    "primeira_captura": "2026-10-05",
-    "segmentos": [
-      "Comércio exterior / logística internacional"
-    ],
-    "uf": "MG",
-    "valor_estimado": 69312.73
-  },
   "27108141000189-1-000027/2026": {
-    "alertado_followup": false,
+    "alertado_followup": true,
     "data_publicacao": "2026-04-30T13:44:33",
     "encerramento_proposta": "2026-11-11T08:00:00",
     "link": "https://pncp.gov.br/app/editais/27108141000189/2026/27",
@@ -118,7 +164,7 @@
     "valor_estimado": 1369904.06
   },
   "27108141000189-1-000081/2025": {
-    "alertado_followup": false,
+    "alertado_followup": true,
     "data_publicacao": "2026-08-12T13:02:21",
     "encerramento_proposta": "2026-11-11T08:00:00",
     "link": "https://pncp.gov.br/app/editais/27108141000189/2025/81",
@@ -146,6 +192,21 @@
     "uf": "RJ",
     "valor_estimado": 1023165.0
   },
+  "30467039000184-1-000048/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-10-21T14:44:16",
+    "encerramento_proposta": "2026-11-10T13:00:00",
+    "link": "https://pncp.gov.br/app/editais/30467039000184/2026/48",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "Contratação de empresa especializada para a prestação de serviços contínuos de manutenção preventiva e corretiva, com fornecimento e reposição de quaisquer componentes/peças novos e originais, da subestação de energia elétrica e seus equipamentos nos imóveis da Câmara Municipal do Rio de Janeiro.",
+    "orgao": "CAMARA MUNICIPAL DO RIO DE JANEIRO",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "RJ",
+    "valor_estimado": 110576.88
+  },
   "34040345000190-1-000029/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-09-22T18:32:55",
@@ -159,6 +220,21 @@
       "Engenharia de instalação de BESS"
     ],
     "uf": "RN",
+    "valor_estimado": 0.0
+  },
+  "42498600000171-1-004772/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-05T16:26:50",
+    "encerramento_proposta": null,
+    "link": "https://pncp.gov.br/app/editais/42498600000171/2026/4772",
+    "modalidade": "Inexigibilidade",
+    "objeto": "Importação de Espectrômetro de Massa de Alta Resolução – TIMSMetabo timsMetabo LC-MS System, sistema de bancada para o timsTOF SCP LC-MS System, plataforma com coluna cromatográfica Elute+ UHPLC, coluna horizontal Elute+ CO SL std, estação de trabalho com software MetaboScape/TASQ (computador desktop completo, com monitor de 24”), mistura QSee 8-mix com 8 compostos hidrofílicos, liquefator Peak Genius 3045 que fornece nitrogênio líquido para o aparelho integrado com compressor de ar, transformador dual tap 200-230Vac, um dia de treinamento, treinamento operacional essencial, instalação com treinamento de 3 dias, serviço de manutenção LABSCAPE completo, e manutenção para as colunas.",
+    "orgao": "ESTADO DO RIO DE JANEIRO",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Energia (transformadores/geradores/BESS)"
+    ],
+    "uf": "RJ",
     "valor_estimado": 0.0
   },
   "46377800000127-1-004643/2026": {
@@ -191,6 +267,51 @@
     "uf": "SP",
     "valor_estimado": 111598.16
   },
+  "48031918000124-1-003132/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-10-29T10:48:15",
+    "encerramento_proposta": null,
+    "link": "https://pncp.gov.br/app/editais/48031918000124/2026/3132",
+    "modalidade": "Dispensa",
+    "objeto": "CONTRATAÇÃO DE EMPRESA ESPECIALIZADA PARA EXECUÇÃO DE SERVIÇOS DE MANUTENÇÃO CORRETIVA E PREVENTIVA DA CABINE PRIMÁRIA BLINDADA DE MÉDIA TENSÃO DA UNIDADE AGROCHÁ DA FACULDADE DE CIÊNCIAS AGRÁRIAS DO VALE DO RIBEIRA – FCAVR, CAMPUS DE REGISTRO DA UNESP",
+    "orgao": "UNIVERSIDADE ESTADUAL PAULISTA JULIO DE MESQUITA FILHO",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 36989.0
+  },
+  "50062751000100-1-000367/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-04T08:19:17",
+    "encerramento_proposta": "2026-11-19T08:00:00",
+    "link": "https://pncp.gov.br/app/editais/50062751000100/2026/367",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "Contratação de empresa especializada para execução de cabine primária de transformação, em subestação abrigada de alvenaria, classe 15 kV, com medição em baixa tensão e entrada de energia subterrânea, abrangendo todo o trecho de entrada de energia desde o poste do ramal situado na via pública até a cabine primária interna, incluindo serviços civis e elétricos, materiais e equipamentos necessários, instalação do transformador de 300 kVA fornecido pela Administração, aterramento, comissionamento, acompanhamento junto à CPFL Paulista até a energização definitiva, emissão de laudo de aterramento, ART e documentação técnica as-built.",
+    "orgao": "SERVICO AUTONOMO DE AGUA E ESGOTO DE CAPIVARI",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 234262.5
+  },
+  "62655246000159-1-000064/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-03T12:06:54",
+    "encerramento_proposta": "2027-01-04T10:00:00",
+    "link": "https://pncp.gov.br/app/editais/62655246000159/2026/64",
+    "modalidade": "Concorrência - Eletrônica",
+    "objeto": "Contratação de empresa especializada para executar as obras de reforma, retrofit e ampliação do Bloco A do imóvel pertencente ao patrimônio do CRECI/SP, localizado na Avenida Indianópolis, nº 1.706, Indianópolis, São Paulo/SP, incluindo a adequação do elevador e as intervenções previstas na cabine primária de energia elétrica existente, conforme os projetos, as especificações técnicas, os memoriais, as plantas, os quantitativos, a planilha orçamentária e o cronograma  físico-financeiro e exigências estabelecidas no Edital e seus anexos.",
+    "orgao": "CONSELHO REGIONAL DE CORRETORES DE IMOVEIS DA 2 REGIAO",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 18022751.38
+  },
   "75234757000149-1-001860/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-10-19T14:10:10",
@@ -207,7 +328,7 @@
     "valor_estimado": 2250.0
   },
   "75741363000187-1-000065/2026": {
-    "alertado_followup": false,
+    "alertado_followup": true,
     "data_publicacao": "2026-10-21T16:02:45",
     "encerramento_proposta": "2026-11-10T08:30:00",
     "link": "https://pncp.gov.br/app/editais/75741363000187/2026/65",
@@ -235,20 +356,6 @@
     "uf": "PR",
     "valor_estimado": 3000.0
   },
-  "86891363000180-1-000102/2026": {
-    "alertado_followup": false,
-    "encerramento_proposta": "2026-10-07T07:59:59",
-    "link": "https://pncp.gov.br/app/editais/86891363000180/2026/102",
-    "modalidade": "Pregão - Eletrônico",
-    "objeto": "Contratação de serviços de despachante aduaneiro para equipamentos importados  (Microscópio de Fluorescência e GreenFeed Pasture Trailer)   Convênio nº 01.24.0714.00",
-    "orgao": "FUNDACAO UNIVERSIDADE ESTADUAL DE MATO GROSSO DO SUL",
-    "primeira_captura": "2026-10-05",
-    "segmentos": [
-      "Comércio exterior / logística internacional"
-    ],
-    "uf": "MS",
-    "valor_estimado": 22874.26
-  },
   "87592861000194-1-000441/2026": {
     "alertado_followup": true,
     "data_publicacao": "2026-10-17T08:32:03",
@@ -265,7 +372,7 @@
     "valor_estimado": 3540230.98
   },
   "88768080000170-1-000608/2026": {
-    "alertado_followup": false,
+    "alertado_followup": true,
     "data_publicacao": "2026-10-23T11:34:50",
     "encerramento_proposta": "2026-11-10T08:00:00",
     "link": "https://pncp.gov.br/app/editais/88768080000170/2026/608",
@@ -280,7 +387,7 @@
     "valor_estimado": 131930.65
   },
   "88768080000170-1-000609/2026": {
-    "alertado_followup": false,
+    "alertado_followup": true,
     "data_publicacao": "2026-10-23T11:43:25",
     "encerramento_proposta": "2026-11-10T08:00:00",
     "link": "https://pncp.gov.br/app/editais/88768080000170/2026/609",
@@ -293,6 +400,21 @@
     ],
     "uf": "RS",
     "valor_estimado": 131930.65
+  },
+  "95591764000105-1-000300/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-10-26T09:08:51",
+    "encerramento_proposta": null,
+    "link": "https://pncp.gov.br/app/editais/95591764000105/2026/300",
+    "modalidade": "Dispensa",
+    "objeto": "Importação direta dos seguintes equipamentos: 1 Osciloscópio – Oscilloscope MXO44-BNDL - MXO 4 series digital oscilloscope 4 channels Bundle; MXO4-B1; MXO4-Z1; e 1 Gerador de Sinal – Signal Generator - SMA100B; SMABB92; SMAB-B103; SMAB-B29, junto à empresa Rohde & Schwarz GmbH & Co. KG, para atender ao Projeto de Pesquisa “Projeto e Implementação de Módulos e Componentes (em Software e Hardware) para o Microcontrolador uC32RFBR - Aplicações de Segurança e IoT (MCMC32)”.",
+    "orgao": "UNIVERSIDADE FEDERAL DE SANTA MARIA",
+    "primeira_captura": "2026-11-09",
+    "segmentos": [
+      "Energia (transformadores/geradores/BESS)"
+    ],
+    "uf": "RS",
+    "valor_estimado": 302500.0
   },
   "96291141000180-1-007225/2026": {
     "alertado_followup": false,
