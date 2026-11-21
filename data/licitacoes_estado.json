@@ -44,6 +44,21 @@
     "uf": "MG",
     "valor_estimado": 500000.0
   },
+  "00489828000155-1-000003/2027": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-06T04:00:28",
+    "encerramento_proposta": "2026-11-23T09:00:00",
+    "link": "https://pncp.gov.br/app/editais/00489828000155/2027/3",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "Contratação dos serviços de engenharia para manutenção em subestação de energia 1,25 MVA; 13,8 KV na Superintendência Regional de Administração na Bahia - SRA/BA, com aplicação de mão de obra, equipamentos e material necessários.",
+    "orgao": "MINISTERIO DA GESTAO E DA INOVACAO EM SERVICOS PUBLICOS",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "BA",
+    "valor_estimado": 156784.74
+  },
   "04407029000143-1-000055/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-10-22T20:31:56",
@@ -207,8 +222,38 @@
     "uf": "RJ",
     "valor_estimado": 110576.88
   },
-  "34040345000190-1-000029/2026": {
+  "34028316000103-1-000146/2026": {
     "alertado_followup": false,
+    "data_publicacao": "2026-11-04T18:30:30",
+    "encerramento_proposta": "2027-01-14T09:00:00",
+    "link": "https://pncp.gov.br/app/editais/34028316000103/2026/146",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "LICITAÇÃO CORREIOS Nº 26000282/2026 - SE/RJ - Execução da obra para Implantação de Sistemas Fotovoltaicos de Geração de Energia Elétrica conectado à Rede (SFVCR) no Complexo de Nova Iguaçu/RJ, manutenção da cobertura, modernização da subestação de energia elétrica, incluindo elaboração dos projetos executivos, na forma de execução indireta, no regime de contratação semi integrada. IMPORTANTE: ao registrar as propostas, atentar para o item 6.9 e seus subitens. A Licitação será realizada pela CPL/MG. (REGISTRAR VALOR TOTAL DO LOTE - SUGERIMOS MINUCIOSA LEITURA DO EDITAL E SEUS ANEXOS).",
+    "orgao": "EMPRESA BRASILEIRA DE CORREIOS E TELEGRAFOS",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "DF",
+    "valor_estimado": 2393837.76
+  },
+  "34028316000103-1-000153/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-10T18:30:11",
+    "encerramento_proposta": "2027-01-20T09:00:00",
+    "link": "https://pncp.gov.br/app/editais/34028316000103/2026/153",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "LICITAÇÃO CORREIOS Nº 26000007/2026 - SE/RS - Contratação de empresa especializada, sem cessão de mão de obra, para execução do serviço de engenharia do projeto e da instalação de um sistema BESS (Battery Energy Storage System) com eletrocentro, nas dependências do Edifício Sede da Superintendência Regional do Rio Grande do Sul - SE/RS, pelo regime de contratação semi-integrada, CONFORME INFORMAÇÕES CONTIDAS NO EDITAL E SEUS ANEXOS. (ATENÇÃO: REGISTRAR VALOR TOTAL DO LOTE - SUGERIMOS MINUCIOSA LEITURA DO EDITAL E SEUS \nANEXOS) .",
+    "orgao": "EMPRESA BRASILEIRA DE CORREIOS E TELEGRAFOS",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Engenharia de instalação de BESS"
+    ],
+    "uf": "DF",
+    "valor_estimado": 0.0
+  },
+  "34040345000190-1-000029/2026": {
+    "alertado_followup": true,
     "data_publicacao": "2026-09-22T18:32:55",
     "encerramento_proposta": "2026-11-26T15:00:00",
     "link": "https://pncp.gov.br/app/editais/34040345000190/2026/29",
@@ -220,6 +265,21 @@
       "Engenharia de instalação de BESS"
     ],
     "uf": "RN",
+    "valor_estimado": 0.0
+  },
+  "34593525000108-1-000044/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-10T09:03:57",
+    "encerramento_proposta": "2026-11-26T09:00:00",
+    "link": "https://pncp.gov.br/app/editais/34593525000108/2026/44",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "[Portal de Compras Públicas] - Contratação de empresa especializada para execução de serviços de instalação de subestação de energia elétrica com potência de 225 kva na Emef. Abraham Lincoln, incluindo o fornecimento de materiais, equipamentos, mão de obra, adequações necessárias e demais serviços indispensáveis ao pleno funcionamento do sistema, em conformidade com as normas técnicas vigentes e as exigências da concessionária de energia elétrica.",
+    "orgao": "MUNICIPIO DE MEDICILANDIA",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "PA",
     "valor_estimado": 0.0
   },
   "42498600000171-1-004772/2026": {
@@ -237,6 +297,21 @@
     "uf": "RJ",
     "valor_estimado": 0.0
   },
+  "45743580000145-1-000128/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-10T15:10:50",
+    "encerramento_proposta": "2026-11-13T18:00:00",
+    "link": "https://pncp.gov.br/app/editais/45743580000145/2026/128",
+    "modalidade": "Dispensa",
+    "objeto": "DISPENSABILIDADE 78/2026 - CONTRATAÇÃO DE EMPRESA PARA PROJETO E EXECUÇÃO DE IMPERMEABILIZAÇÃO DE LAJE ATRAVÉS DE APLICAÇÃO DE MANTA ASFÁLTICA PARA CESSAR VAZAMENTOS INTERNOS NA CABINE PRIMÁRIA",
+    "orgao": "SAAE - SANEAMENTO AMBIENTAL DE ATIBAIA",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 20563.5
+  },
   "46377800000127-1-004643/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-10-22T11:25:39",
@@ -251,6 +326,21 @@
     ],
     "uf": "SP",
     "valor_estimado": 58000.0
+  },
+  "46711362000191-1-000107/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-16T22:53:55",
+    "encerramento_proposta": "2026-12-03T09:00:00",
+    "link": "https://pncp.gov.br/app/editais/46711362000191/2026/107",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "Contratação de empresa especializada em serviços de manutenção corretiva, com fornecimento de peças e ensaios elétricos, para o disjuntor de média tensão da subestação de energia elétrica da ETA do SAAE Mogi Mirim/SP.",
+    "orgao": "SERVICO AUTONOMO DE AGUA E ESGOTOS DE MOGI MIRIM",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 22282.85
   },
   "48031918000124-1-002923/2026": {
     "alertado_followup": true,
@@ -282,6 +372,21 @@
     "uf": "SP",
     "valor_estimado": 36989.0
   },
+  "48031918000124-1-003394/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-14T00:34:43",
+    "encerramento_proposta": null,
+    "link": "https://pncp.gov.br/app/editais/48031918000124/2026/3394",
+    "modalidade": "Dispensa",
+    "objeto": "Contratação de Serviços para manutenção da cabine primária de energia",
+    "orgao": "UNIVERSIDADE ESTADUAL PAULISTA JULIO DE MESQUITA FILHO",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 6000.0
+  },
   "50062751000100-1-000367/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-11-04T08:19:17",
@@ -297,6 +402,51 @@
     "uf": "SP",
     "valor_estimado": 234262.5
   },
+  "51213049000163-1-000050/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-12T12:19:20",
+    "encerramento_proposta": null,
+    "link": "https://pncp.gov.br/app/editais/51213049000163/2026/50",
+    "modalidade": "Dispensa",
+    "objeto": "Contratação de serviços emergenciais para reparo da cabine primária com fornecimento de peças.",
+    "orgao": "SECRETARIA DE DESENVOLVIMENTO ECONOMICO",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 7937.6
+  },
+  "59052316000170-1-000033/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-16T16:10:15",
+    "encerramento_proposta": "2026-11-23T17:00:00",
+    "link": "https://pncp.gov.br/app/editais/59052316000170/2026/33",
+    "modalidade": "Dispensa",
+    "objeto": "Contratação de empresa especializada para a prestação de serviços de manutenção preventiva do Transformador de Distribuição e da Cabine Primária da Câmara Municipal de Itapevi.",
+    "orgao": "ITAPEVI CAMARA MUNICIPAL",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 11500.0
+  },
+  "61993931000122-1-000011/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-05T10:03:28",
+    "encerramento_proposta": "2026-11-30T08:59:00",
+    "link": "https://pncp.gov.br/app/editais/61993931000122/2026/11",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "Contratação de empresa especializada na prestação de serviço comum de engenharia, não continuado e contratado por escopo, de manutenção da infraestrutura civil das edificações que compõem o complexo predial da Subdivisão de Ensaios Aerodinâmicos (ACE-L) do IAE, em São José dos Campos/SP, sob o regime de empreitada por preço global, sem dedicação exclusiva de mão de obra, compreendendo o fornecimento de materiais, equipamentos, ferramentas e mão de obra especializada, conforme especificações técnicas, quantitativos e demais condições constantes do Termo de Referência e do Projeto Básico, abrangendo:\na) elaboração de cinco projetos executivos (escada de marinheiro, sistema de abertura do alçapão de içamento de modelos, recuperação do reservatório enterrado, andaime para limpeza da tela interna do túnel e itens diversos);\nb) substituição da impermeabilização sobre o túnel aerodinâmico, com remoção da manta existente e aplicação de manta asfáltica de 4 mm em 1.500 m², além da impermeabilização das telhas metálicas da torre de resfriamento e da recuperação do reservatório enterrado (260 m²);\nc) implantação de sistemas metálicos de segurança operacional: nova escada de marinheiro com guarda-corpo, alçapão de içamento de modelos em chapa de aço xadrez com guarda-corpo removível e guinchos de alavanca, e sistema de andaime ancorado (144 m²) para limpeza da tela interna de 12 m x 12 m;\nd) pintura interna e externa das edificações e tratamento anticorrosivo de superfícies metálicas; e\ne) manutenções gerais, incluindo a troca da cobertura e da estrutura de sustentação da cabine primária do TA-2 (300 m²), a substituição e o reassentamento de portões e a troca de placas de forro.\nAs benfeitorias resultantes integrarão o patrimônio da União, sob jurisdição do COMAER, conforme previsto no Termo de Compromisso de Destinação de Recursos Derivados de Acordo de Não Persecução Penal firmado pela ALADA perante o Superior Tribunal de Justiça (STJ), no âmbito da Petição nº 14.023/DF e do Edital GMOF/STJ de Chamamento Público nº 2/2025.",
+    "orgao": "ALADA - EMPRESA DE PROJETOS AEROESPACIAIS DO BRASIL S.A",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "DF",
+    "valor_estimado": 845572.43
+  },
   "62655246000159-1-000064/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-11-03T12:06:54",
@@ -311,6 +461,21 @@
     ],
     "uf": "SP",
     "valor_estimado": 18022751.38
+  },
+  "63606479000124-1-000632/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-10T10:41:08",
+    "encerramento_proposta": "2026-11-13T16:00:00",
+    "link": "https://pncp.gov.br/app/editais/63606479000124/2026/632",
+    "modalidade": "Dispensa",
+    "objeto": "Aquisição, com instalação, de 32 (trinta e duas) baterias seladas VRLA 12 V/18 AH, destinadas à substituição do banco de baterias internas dos 2 (dois) nobreaks de 10 kVA que atendem ao Centro de Processamento de Dados (CPD), por meio da Secretaria de Estado de Justiça e Segurança Pública - SEJUSP/AC.",
+    "orgao": "ESTADO DO ACRE",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Engenharia de instalação de BESS"
+    ],
+    "uf": "AC",
+    "valor_estimado": 0.32
   },
   "75234757000149-1-001860/2026": {
     "alertado_followup": false,
@@ -401,6 +566,21 @@
     "uf": "RS",
     "valor_estimado": 131930.65
   },
+  "94187358000119-1-000200/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-19T08:27:19",
+    "encerramento_proposta": "2026-12-09T08:29:00",
+    "link": "https://pncp.gov.br/app/editais/94187358000119/2026/200",
+    "modalidade": "Concorrência - Eletrônica",
+    "objeto": "[Portal de Compras Públicas] - Constitui objeto da presente licitação a execução, em regime de empreitada global, construção e instalação de uma subestação de energia elétrica de 112,5 kVA, com fornecimento integral de materiais, equipamentos, acessórios, ferramentas e mão de obra necessários à completa execução dos serviços, no imóvel localizado na Rua Madre Techilda, nº 154, Centro, no Município de São José do Inhacorá/RS.",
+    "orgao": "MUNICIPIO DE SAO JOSE DO INHACORA",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "RS",
+    "valor_estimado": 112481.04
+  },
   "95591764000105-1-000300/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-10-26T09:08:51",
@@ -430,5 +610,35 @@
     ],
     "uf": "SP",
     "valor_estimado": 3800.0
+  },
+  "96291141000180-1-007754/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-11T08:57:47",
+    "encerramento_proposta": null,
+    "link": "https://pncp.gov.br/app/editais/96291141000180/2026/7754",
+    "modalidade": "Dispensa",
+    "objeto": "Contratação de Serviço Cabine Primária",
+    "orgao": "SAO PAULO SECRETARIA DA ADMINISTRACAO PENITENCIARIA",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 23990.0
+  },
+  "96291141000180-1-007846/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-12T17:23:30",
+    "encerramento_proposta": null,
+    "link": "https://pncp.gov.br/app/editais/96291141000180/2026/7846",
+    "modalidade": "Dispensa",
+    "objeto": "manutenção preventiva em cabine primaria",
+    "orgao": "SAO PAULO SECRETARIA DA ADMINISTRACAO PENITENCIARIA",
+    "primeira_captura": "2026-11-21",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 10855.0
   }
 }
