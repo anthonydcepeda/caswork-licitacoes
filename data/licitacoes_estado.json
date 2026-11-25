@@ -103,6 +103,21 @@
     "uf": "PB",
     "valor_estimado": 64000.0
   },
+  "09062893000174-1-000010/2026": {
+    "alertado_followup": false,
+    "data_publicacao": "2026-11-23T18:47:20",
+    "encerramento_proposta": "2026-12-01T09:00:00",
+    "link": "https://pncp.gov.br/app/editais/09062893000174/2026/10",
+    "modalidade": "Pregão - Eletrônico",
+    "objeto": "Contratação de empresa especializada em serviços de engenharia para fornecimento e instalação de transformador de potência a seco de 750 KVA, 13,8/220-127 V",
+    "orgao": "(UO) ESP - COMPANHIA DOCAS DE SAO SEBASTIAO",
+    "primeira_captura": "2026-11-25",
+    "segmentos": [
+      "Equipamento de subestação / cabine primária"
+    ],
+    "uf": "SP",
+    "valor_estimado": 0.0
+  },
   "12320017000105-1-000038/2026": {
     "alertado_followup": false,
     "data_publicacao": "2026-10-26T10:41:10",
@@ -268,7 +283,7 @@
     "valor_estimado": 0.0
   },
   "34593525000108-1-000044/2026": {
-    "alertado_followup": false,
+    "alertado_followup": true,
     "data_publicacao": "2026-11-10T09:03:57",
     "encerramento_proposta": "2026-11-26T09:00:00",
     "link": "https://pncp.gov.br/app/editais/34593525000108/2026/44",
@@ -433,7 +448,7 @@
     "valor_estimado": 11500.0
   },
   "61993931000122-1-000011/2026": {
-    "alertado_followup": false,
+    "alertado_followup": true,
     "data_publicacao": "2026-11-05T10:03:28",
     "encerramento_proposta": "2026-11-30T08:59:00",
     "link": "https://pncp.gov.br/app/editais/61993931000122/2026/11",
